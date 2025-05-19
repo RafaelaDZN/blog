@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site de Curiosidades</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+    <h1>Bem-vindo ao site de curiosidades!</h1>
+    <ul>
+        <li><a href="{% url 'posts' %}">Ver Posts</a></li>
+        <li><a href="{% url 'comentarios' %}">Ver Comentários</a></li>
+        <li><a href="{% url 'avaliacoes' %}">Ver Avaliações</a></li>
+        <li><a href="{% url 'criar_post' %}">Criar Post</a></li>
+        <li><a href="{% url 'criar_comentario' %}">Adicionar Comentário</a></li>
+        <li><a href="{% url 'criar_avaliacao' %}">Fazer Avaliação</a></li>
+    </ul>
+</body>
+</html>

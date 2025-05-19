@@ -1,0 +1,56 @@
+from django.views.generic import TemplateView, ListView, CreateView
+from django.urls import reverse_lazy
+from .models import Post, Comentario, Avaliacao
+from .forms import PostForm, ComentarioForm, AvaliacaoForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# Página inicial
+class IndexView(TemplateView):
+    template_name = 'paginasweb/index.html'
+
+# Listagens
+class PostListView(ListView):
+    model = Post
+    template_name = 'paginasweb/posts.html'
+    context_object_name = 'posts'
+
+class ComentarioListView(ListView):
+    model = Comentario
+    template_name = 'paginasweb/comentarios.html'
+    context_object_name = 'comentarios'
+
+class AvaliacaoListView(ListView):
+    model = Avaliacao
+    template_name = 'paginasweb/avaliacoes.html'
+    context_object_name = 'avaliacoes'
+
+# Criação (formulários)
+class CriarPostView(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'paginasweb/criar_post.html'
+    success_url = reverse_lazy('posts')
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
+class CriarComentarioView(LoginRequiredMixin, CreateView):
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = 'paginasweb/criar_comentario.html'
+    success_url = reverse_lazy('comentarios')
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
+class CriarAvaliacaoView(LoginRequiredMixin, CreateView):
+    model = Avaliacao
+    form_class = AvaliacaoForm
+    template_name = 'paginasweb/criar_avaliacao.html'
+    success_url = reverse_lazy('avaliacoes')
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
