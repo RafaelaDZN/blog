@@ -1,17 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Avaliações</title>
+    <title>Criar Post</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
-    <h1>Avaliações</h1>
-    {% for a in avaliacoes %}
-        <div>
-            <p><strong>Usuário:</strong> {{ a.usuario.username }}</p>
-            <p><strong>Tipo:</strong> {{ a.tipo }} | <strong>Nota:</strong> {{ a.nota }}</p>
-            <p><strong>Post:</strong> {{ a.post.titulo }}</p>
-        </div>
-    {% endfor %}
+    <h1>Novo Post</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
     <a href="{% url 'index' %}">Voltar</a>
 </body>
 </html>

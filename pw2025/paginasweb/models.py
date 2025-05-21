@@ -1,13 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
 
 
-class Autor(models.Model):
-    nome = models.CharField(max_length=100)
-    senha=models.CharField(max_length=100)
-    user = authenticate( username=nome, password=senha,on_delete=models.PROTECT)
+
 
 class Categoria(models.Model):
     tipo = models.CharField(max_length=100)

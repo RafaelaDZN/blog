@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Posts</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
     <h1>Posts</h1>
@@ -9,7 +11,11 @@
         <div>
             <h2>{{ post.titulo }}</h2>
             <p>{{ post.conteudo }}</p>
-            <p><strong>Autor:</strong> {{ post.autor.username }} | <strong>Data:</strong> {{ post.data }}</p>
+            <p>
+                <strong>Autor:</strong>
+                {% if post.autor %}{{ post.autor.username }}{% else %}Sem autor{% endif %}
+                | <strong>Data:</strong> {{ post.data }}
+            </p>
             <p><strong>Categoria:</strong> {{ post.categoria }}</p>
         </div>
     {% endfor %}
