@@ -1,4 +1,5 @@
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Post, Comentario, Avaliacao
 from .forms import PostForm, ComentarioForm, AvaliacaoForm
@@ -24,7 +25,8 @@ class AvaliacaoListView(ListView):
     template_name = 'paginasweb/avaliacoes.html'
     context_object_name = 'avaliacoes'
 
-# Criação (formulários)
+################################ Criação (formulários)
+
 class CriarPostView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
@@ -54,3 +56,49 @@ class CriarAvaliacaoView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         return super().form_valid(form)
+
+
+################################ Criação (formulários)
+
+
+class AtualizarPostView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'paginasweb/criar_post.html'
+    success_url = reverse_lazy('posts')
+
+
+class AtualizarComentarioView(LoginRequiredMixin, UpdateView):
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = 'paginasweb/criar_comentario.html'
+    success_url = reverse_lazy('comentarios')
+
+
+class AtualizarAvaliacaoView(LoginRequiredMixin, UpdateView):
+    model = Avaliacao
+    form_class = AvaliacaoForm
+    template_name = 'paginasweb/criar_avaliacao.html'
+    success_url = reverse_lazy('avaliacoes')
+
+################################ Criação (formulários)
+
+class DeletarPostView(LoginRequiredMixin, DeleteView):
+    model = Post
+    form_class = PostForm
+    template_name = 'paginasweb/criar_post.html'
+    success_url = reverse_lazy('posts')
+
+
+class DeletarComentarioView(LoginRequiredMixin,DeleteView ):
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = 'paginasweb/criar_comentario.html'
+    success_url = reverse_lazy('comentarios')
+
+
+class DeletarAvaliacaoView(LoginRequiredMixin, DeleteView):
+    model = Avaliacao
+    form_class = AvaliacaoForm
+    template_name = 'paginasweb/criar_avaliacao.html'
+    success_url = reverse_lazy('avaliacoes')

@@ -2,7 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
+TIPOS =(
+    ("aaa", "Aaaaa"),
+    ("bbb", "Bbbbb"),
+    ("ccc", "Cccc"),
+)
 
 class Categoria(models.Model):
     tipo = models.CharField(max_length=100)
@@ -27,7 +31,7 @@ class Comentario(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class Avaliacao(models.Model):
-    tipo = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=100, choices=TIPOS)
     nota = models.CharField(max_length=10)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

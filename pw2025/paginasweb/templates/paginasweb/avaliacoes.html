@@ -12,6 +12,11 @@
             <p><strong>Usuário:</strong> {{ a.usuario.username }}</p>
             <p><strong>Tipo:</strong> {{ a.tipo }} | <strong>Nota:</strong> {{ a.nota }}</p>
             <p><strong>Post:</strong> {{ a.post.titulo }}</p>
+            <a href="{% url 'atualizar_avaliacao' a.id %}">Editar</a>
+            <form action="{% url 'deletar_avaliacao' a.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Deletar</button>
+            </form>
         </div>
     {% endfor %}
     <a href="{% url 'index' %}">Voltar</a>
