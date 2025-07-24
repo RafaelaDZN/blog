@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Girls</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+        {% else %}
+        {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

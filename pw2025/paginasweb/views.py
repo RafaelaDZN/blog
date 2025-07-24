@@ -4,23 +4,24 @@ from django.urls import reverse_lazy
 from .models import Post, Comentario, Avaliacao
 from .forms import PostForm, ComentarioForm, AvaliacaoForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 
 # Página inicial
 class IndexView(TemplateView):
     template_name = 'paginasweb/index.html'
 
 # Listagens
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'paginasweb/posts.html'
     context_object_name = 'posts'
 
-class ComentarioListView(ListView):
+class ComentarioListView(LoginRequiredMixin, ListView):
     model = Comentario
     template_name = 'paginasweb/comentarios.html'
     context_object_name = 'comentarios'
 
-class AvaliacaoListView(ListView):
+class AvaliacaoListView(LoginRequiredMixin, ListView):
     model = Avaliacao
     template_name = 'paginasweb/avaliacoes.html'
     context_object_name = 'avaliacoes'
@@ -102,3 +103,14 @@ class DeletarAvaliacaoView(LoginRequiredMixin, DeleteView):
     form_class = AvaliacaoForm
     template_name = 'paginasweb/criar_avaliacao.html'
     success_url = reverse_lazy('avaliacoes')
+
+
+class CustomLogoutView(LogoutView):
+    next_page = 'index'
+
+class CustomPasswordChangeView(PasswordChangeView):
+    template_name = 'paginasweb/password_change.html'
+    success_url = '/password_change/done/'
+
+class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'paginasweb/password_change_done.html'

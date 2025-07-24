@@ -27,3 +27,11 @@ button {
     border-radius: 3px;
     cursor: pointer;
 }
+table a {
+    color: #007bff;
+    text-decoration: underline;
+}
+table a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}

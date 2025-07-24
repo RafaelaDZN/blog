@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+    {% extends 'paginasweb/base.html' %}
     {% load static %}
 <head>
     <title>BLOG GIRLS</title>
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
+   
+{% block content %}
     <h1>Bem-vindo ao Blog Girls!</h1>
     <ul>
         <li><a href="{% url 'posts' %}">Ver Posts</a></li>
@@ -15,5 +18,16 @@
         <li><a href="{% url 'criar_comentario' %}">Adicionar Comentário</a></li>
         <li><a href="{% url 'criar_avaliacao' %}">Fazer Avaliação</a></li>
     </ul>
+    
+{% if user.is_authenticated %}
+    <a href="{% url 'password_change' %}" class="btn">Alterar Senha</a>
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn">Logout</button>
+    </form>
+{% else %}
+   
+{% endif %}
+{% endblock %}
 </body>
 </html>
