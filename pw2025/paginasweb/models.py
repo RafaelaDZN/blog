@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 
 
 TIPOS =(
-    ("aaa", "Aaaaa"),
-    ("bbb", "Bbbbb"),
-    ("ccc", "Cccc"),
+    ("bom", "BOM"),
+    ("legal", "LEGAL"),
+    ("ruim", "Ruim"),
 )
 
 class Categoria(models.Model):
@@ -20,6 +20,7 @@ class Post(models.Model):
     data = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(User, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return self.titulo
